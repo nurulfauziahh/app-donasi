@@ -133,23 +133,21 @@ class _InfoScreenState extends State<InfoScreen> {
                                 return FadeAnimation(
                                   1.8,
                                   GestureDetector(
-                                    onTap: () async {
-                                      bool result = await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return DetailDonasi(
-                                            documentId:
-                                                documentSnapshot.documentID,
-                                            namaDonasi: task['namaDonasi'],
-                                            shortDeskripsi: task['shortDeskripsi'],
-                                            danaDonasi: task['danaDonasi'],
-                                            deskripsi: task['deskripsi'],
-                                            kategori: task['kategori'],
-           
-                                          );
-                                        }),
-                                      );
-                                    },
+                                        // onTap: () async {
+                                        //   bool result = await Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) {
+                                        //       return DetailDonasi(
+                                        //         documentId:
+                                        //             documentSnapshot.documentID,
+                                        //         namaDonasi: task['namaDonasi'],
+                                        //         deskripsi: task['deskripsi'],
+                                        //         danaDonasi: task['danaDonasi'],
+                                        //       );
+                                        //     }),
+                                        //   );
+                                        // },
                                     child: InkWell(
                                       child: Container(
                                         
@@ -162,101 +160,51 @@ class _InfoScreenState extends State<InfoScreen> {
                                               child: Stack(
                                                 alignment: Alignment.centerLeft,
                                                 children: <Widget>[
-                                                  Container(
-                                                    // height: 50,
-                                                    // width: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      color: Colors.white,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          offset: Offset(0, 8),
-                                                          blurRadius: 24,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  
-                                                  Padding(
-                                                      padding: const EdgeInsets.only(bottom: 10),
-                                                        child: Container(
-                                                        child: SizedBox(
-                                                          height: 156,
-                                                          child: Stack(
-                                                        alignment: Alignment.centerLeft,
-                                                      children: <Widget>[
-                                                        Container(
-                                                   
-                                                    height: 150,
-                                                    width: double.infinity,
-                                                    decoration : BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(20),
-                                                        color : Colors.white,
-                                                        boxShadow: [
-                                                        BoxShadow(
-                                                          offset: Offset(0,8),
-                                                          blurRadius: 24,
-                                                          color : kShadowColor,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Image.asset("assets/images/wear_mask.png"),
-                                                  Positioned(
-                                                    left: 130,
-                                                    child: Container(
-                                                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                                                      height: 136,
-                                                      width: MediaQuery.of(context).size.width - 170,
-                                                      child : Column (
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children : <Widget>[
-                                                          Text(
-                                                            documentSnapshot.data()['namaDonasi'],
-                                                            
-                                                            style: kTitleTextstyle.copyWith(
-                                                              fontSize: 16,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Text(
-                                                              documentSnapshot.data()['shortDeskripsi'],
-                                                              
-                                                              //  documentSnapshot.data()['danaDonasi'].toString(),
-                                                              maxLines : 4,
-                                                              overflow: TextOverflow.ellipsis,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          
-                                                        
-                                                            Row(
-                                                              children: <Widget>[
+                                                             Container(
+                                                          margin:EdgeInsets.all(8.0),
+                                                          child: Card(
+                                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                          bool result = await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                              return DetailDonasi(
+                                                documentId:
+                                                    documentSnapshot.documentID,
+                                                namaDonasi: task['namaDonasi'],
+                                                deskripsi: task['deskripsi'],
+                                                danaDonasi: task['danaDonasi'],
+                                                gambarDonasi: task['gambarDonasi'],
+                                                kategori: task['kategori'],
 
-                                                                new Text(
-                                                                  "Dana yang terkumpul",
-                                                                  style:
-                                                                      TextStyle(color: Colors.grey, fontSize: 10),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          Text(
-                                                              "Rp. " + documentSnapshot.data()['danaDonasi'].toString(),
-                                                              //  documentSnapshot.data()['danaDonasi'].toString(),
-                                                              
-                                                              maxLines : 4,
-                                                              overflow: TextOverflow.ellipsis,
-                                                              style: TextStyle(color: Colors.green,
-                                                                fontSize: 12,
-                                                            ), ), 
-                                                             new Padding(padding: EdgeInsets.all(3)),
-                                                            Stack(
+                                                
+                                              );
+                                            }),
+                                          );
+                                        },
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+                                                                children: <Widget>[
+                                                                  ClipRRect(
+                                                                    borderRadius: BorderRadius.only(
+                                                                      topLeft: Radius.circular(8.0),
+                                                                      topRight: Radius.circular(8.0),
+                                                                    ),
+                                                                    child: Image.network(
+                                                                        documentSnapshot.data()['gambarDonasi'].toString(),
+                                                                      // width: 300,
+                                                                        height: 150,
+                                                                        fit:BoxFit.fill
+
+                                                                    ),
+                                                                  ),
+                                                                  ListTile(
+                                                                    title: Text(documentSnapshot.data()['namaDonasi']),
+                                                                    subtitle: Text("Rp. "+documentSnapshot.data()['danaDonasi'].toString()),
+                                                                  ),
+                                                                  Stack(
                                                               children: <Widget>[
                                                                 Container(
                                                                   width: 350,
@@ -275,30 +223,155 @@ class _InfoScreenState extends State<InfoScreen> {
                                                                         color: Colors.lightGreen,
                                                                         borderRadius: BorderRadius.circular(5)),
                                                                   ),
-                                                                )
+                                                                ),
+                                                                SizedBox(height: 20),
                                                               ],
                                                             ),
-                                                         SizedBox(height: 10),
-                                                        Align(
-                                                          alignment: Alignment.topRight,
-                                                                      child: SvgPicture.asset("assets/icons/forward.svg"),
-                                                                    ),
-                                                                    
-                                                      ],
-                                                            ),
-                                                    ),
-                                                    
+                                                              ],
+                                                          ),
                                                         ),
+                                                      ),
+                                                    ),
+                                                                                                        
+                                                  // Container(
+                                                  //   // height: 50,
+                                                  //   // width: double.infinity,
+                                                  //   decoration: BoxDecoration(
+                                                  //     borderRadius:
+                                                  //         BorderRadius.circular(
+                                                  //             20),
+                                                  //     color: Colors.white,
+                                                  //     boxShadow: [
+                                                  //       BoxShadow(
+                                                  //         offset: Offset(0, 8),
+                                                  //         blurRadius: 24,
+                                                  //         color: Colors.grey,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                  
+                                                  // Padding(
+                                                  //     padding: const EdgeInsets.only(bottom: 10),
+                                                  //       child: Container(
+                                                  //       child: SizedBox(
+                                                  //         height: 156,
+                                                  //         child: Stack(
+                                                  //       alignment: Alignment.centerLeft,
+                                                  //     children: <Widget>[
+                                                  //       Container(
+                                                   
+                                                  //   height: 150,
+                                                  //   width: double.infinity,
+                                                  //   decoration : BoxDecoration(
+                                                  //       borderRadius: BorderRadius.circular(20),
+                                                  //       color : Colors.white,
+                                                  //       boxShadow: [
+                                                  //       BoxShadow(
+                                                  //         offset: Offset(0,8),
+                                                  //         blurRadius: 24,
+                                                  //         color : kShadowColor,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                  // // Container(
+                                                  // //     height: 120.0,
+                                                  // //     width: 120.0,
+                                                  // //     decoration: BoxDecoration(
+                                                  // //       image: DecorationImage(
+                                                  // //        Image.network(documentSnapshot.data()['gambarDonasi'].toString()),
+                                                  // //         fit: BoxFit.fill,
+                                                  // //       ),
+                                                  // //       shape: BoxShape.circle,
+                                                  // //     ),
+                                                  // //   ),
+                                                  // Image.network(documentSnapshot.data()['gambarDonasi'].toString(), fit:BoxFit.fill),
+                                                  // Positioned(
+                                                  //   left: 130,
+                                                  //   child: Container(
+                                                  //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                                                  //     height: 136,
+                                                  //     width: MediaQuery.of(context).size.width - 170,
+                                                  //     child : Column (
+                                                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                                                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  //       children : <Widget>[
+                                                  //         Text(
+                                                  //           documentSnapshot.data()['namaDonasi'],
+                                                            
+                                                  //           style: kTitleTextstyle.copyWith(
+                                                  //             fontSize: 16,
+                                                  //           ),
+                                                  //         ),
+                                                          
                                                         
-                                                      ],
+                                                  //           Row(
+                                                  //             children: <Widget>[
+
+                                                  //               new Text(
+                                                  //                 "Dana yang terkumpul",
+                                                  //                 style:
+                                                  //                     TextStyle(color: Colors.grey, fontSize: 10),
+                                                  //               ),
+                                                  //             ],
+                                                  //           ),
+                                                            
+                                                  //         Text(
+                                                            
+                                                  //             "Rp. " + documentSnapshot.data()['danaDonasi'].toString(),
+                                                  //             //  documentSnapshot.data()['danaDonasi'].toString(),
+                                                              
+                                                  //             maxLines : 4,
+                                                  //             overflow: TextOverflow.ellipsis,
+                                                  //             style: TextStyle(color: Colors.green,
+                                                  //               fontSize: 12,
+                                                  //           ), ), 
+                                                  //            new Padding(padding: EdgeInsets.all(3)),
+                                                  //           Stack(
+                                                  //             children: <Widget>[
+                                                  //               Container(
+                                                  //                 width: 350,
+                                                  //                 height: 10,
+                                                  //                 decoration: BoxDecoration(
+                                                  //                     color: Colors.grey[200],
+                                                  //                     borderRadius: BorderRadius.circular(5)),
+                                                  //               ),
+                                                  //               Material(
+                                                  //                 borderRadius: BorderRadius.circular(5),
+                                                  //                 child: AnimatedContainer(
+                                                  //                   height: 10,
+                                                  //                   width: 350 * 0.5,
+                                                  //                   duration: Duration(milliseconds: 500),
+                                                  //                   decoration: BoxDecoration(
+                                                  //                       color: Colors.lightGreen,
+                                                  //                       borderRadius: BorderRadius.circular(5)),
+                                                  //                 ),
+                                                  //               )
+                                                  //             ],
+                                                  //           ),
+                                                  //        SizedBox(height: 10),
+                                                  //       Align(
+                                                  //         alignment: Alignment.topRight,
+                                                  //                     child: SvgPicture.asset("assets/icons/forward.svg"),
+                                                  //                   ),
+                                                                    
+                                                  //     ],
+                                                  //           ),
+                                                  //   ),
+                                                    
+                                                  //       ),
+                                                        
+                                                  //     ],
                                                       
-                                                       ),
+                                                  //      ),
                                                        
-                                                  ),
-                                                  ),
+                                                  // ),
+                                                  // ),
                                       
 
-                                                  )],
+                                                  // )
+                                                  ],
                                               ),
                                             ),
                                           ),

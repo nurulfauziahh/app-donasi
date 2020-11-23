@@ -1,59 +1,33 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hmtif/HalamanAspirasi.dart';
-
-import 'package:hmtif/Animation/FadeAnimation.dart';
-import 'package:hmtif/donasi/details/nominal.dart';
 import 'package:hmtif/donasi/info_screen.dart';
-
-const CHANNEL = "com.donasi.hmtif.channel";
-const KEY_NATIVE = "showPaymentGateway";
+import 'package:hmtif/Animation/FadeAnimation.dart';
 
 class DetailDonasi extends StatefulWidget {
   // final DocumentSnapshot MyStudent;
-  // DetailAspirasi({this.MyStudent});
-
-
-
-  final String namaDonasi,
-      deskripsi,
-      shortDeskripsi,
-      gambarDonasi,
-      documentId,
-      kategori;
-  final int danaDonasi;
+  // DetailDonasi({this.MyStudent});
+  final String namaDonasi, deskripsi, documentId, kategori, gambarDonasi,danaDonasi;
+  // final int danaDonasi;
   DetailDonasi({
     // @required this.isEdit,
     @required this.documentId,
     @required this.namaDonasi,
     @required this.deskripsi,
-    @required this.shortDeskripsi,
     @required this.danaDonasi,
-    @required this.gambarDonasi,
     @required this.kategori,
+    @required this.gambarDonasi,
   });
   @override
   _DetailDonasiState createState() => _DetailDonasiState();
 }
 
 class _DetailDonasiState extends State<DetailDonasi> {
-
-  static const platform = const MethodChannel(CHANNEL);
-
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-// Image.asset(
-//       "assets/images/wear_mask.png",
-//       height: size.height * 0.25,
-//       width: double.infinity,
-//       // it cover the 25% of total height
-//       fit: BoxFit.fill,
-//     );
     var delay = 1.5;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -65,45 +39,22 @@ class _DetailDonasiState extends State<DetailDonasi> {
               height: 400,
               child: Stack(
                 children: <Widget>[
-                  // Positioned(
-                  //   top: -40,
-                  //   height: 400,
-                  //   width: width,
-                  //   child: FadeAnimation(
-                  //       1,
-                  //       Container(
-                  //         decoration: BoxDecoration(
-                  //             image: DecorationImage(
-                  //                 image: AssetImage('img/background-1.png'),
-                  //                 fit: BoxFit.fill)),
-                  //       )),
-                  // ),
                   Positioned(
+                    top: -40,
+                    height: 400,
+                    width: width,
                     child: FadeAnimation(
-                        1.3,
+                        1,
                         Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/3.jpg'),
-                                  fit: BoxFit.fill)),
-                        )),
+                           child: Image.network(widget.gambarDonasi.toString(),
+                                                                      // width: 300,
+                                                                        height: 150,
+                                                                        fit:BoxFit.fill
+
+                    ),
+                        )
+                        ),
                   ),
-                  // Positioned(
-                  //   child: FadeAnimation(
-                  //       1.6,
-                  //       Container(
-                  //         margin: EdgeInsets.only(top: 50),
-                  //         child: Center(
-                  //           child: Text(
-                  //             "Detail Donasi",
-                  //             style: TextStyle(
-                  //                 color: Colors.white,
-                  //                 fontSize: 40,
-                  //                 fontWeight: FontWeight.bold),
-                  //           ),
-                  //         ),
-                  //       )),
-                  // )
                 ],
               ),
             ),
@@ -115,29 +66,27 @@ class _DetailDonasiState extends State<DetailDonasi> {
                     FadeAnimation(
                         1.5,
                         Text(
-                          // widget.namaDonasi,
-                          widget.namaDonasi.toString(),
+                          widget.namaDonasi,
                           style: TextStyle(
                               color: Color.fromRGBO(49, 39, 79, 1),
                               fontWeight: FontWeight.bold,
                               fontSize: 25),
                         )),
                     new Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-
+                    // Text(
+                    //   "Dana terkumpul",
+                    //           style:
+                    //               TextStyle(color: Colors.grey, fontSize: 10),
+                    // ),
                     FadeAnimation(
                         1.5,
                         Row(
                           children: <Widget>[
                             new Text(
-                              widget.danaDonasi.toString(),
-                              // widget.danaDonasi.toString(),
-                              style: TextStyle(color: Colors.green),
+                              "Rp. 2000000 dana terkumpul dari "+ widget.danaDonasi,
+                              style: TextStyle(color: Colors.grey, fontSize: 10),
                             ),
-                            new Text(
-                              " Jumlah Dana yang terkumpul",
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 10),
-                            ),
+                            
                           ],
                         )),
                     new Padding(padding: EdgeInsets.all(3)),
@@ -166,6 +115,7 @@ class _DetailDonasiState extends State<DetailDonasi> {
                           ],
                         )),
                     new Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+
                     FadeAnimation(
                         1.5,
                         Stack(
@@ -180,119 +130,72 @@ class _DetailDonasiState extends State<DetailDonasi> {
                     new Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                     FadeAnimation(
                         1.5,
-                        Stack(
-                          children: <Widget>[
-                            new Text(
-                              widget.deskripsi,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(49, 39, 79, 1),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            )
-                          ],
+                        Text(
+                          "Deskripsi",
+                          style: TextStyle(
+                              color: Color.fromRGBO(49, 39, 79, 1),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                    new Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                    FadeAnimation(
+                        1.5,
+                        Text(
+                          widget.deskripsi,
+                          style: TextStyle(
+                              color: Color.fromRGBO(49, 39, 79, 1),
+                              fontSize: 12),
                         )),
                     new Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
-
-                    // FadeAnimation(
-                    //     2,
-                    // StreamBuilder(
-                    //   stream: Firestore.instance
-                    //         .collection("Donasi")
-                    //         .snapshots(),
-                    //     builder: (context, snapshot) {
-                    //       if (snapshot.hasData) {
-                    //         itemBuilder: (context, index) {
-                    //             DocumentSnapshot documentSnapshot =
-                    //                 snapshot.data.documents[index];
-                    //             Map<String, dynamic> task =
-                    //          documentSnapshot.data();
-                    //                 GestureDetector(
-                    //        child : Container (
-                            
-                    //         padding : const EdgeInsets.all(24.0),
-                    //         child: Text("Continue"),
-                    //         color: Colors.indigo,
-                    //             ),
-                    //             onTap: () async {
-                    //                   bool result = await Navigator.push(
-                    //                     context,
-                    //                     MaterialPageRoute(builder: (context) {
-                    //                       return Nominal(
-                    //                         documentId:
-                    //                             documentSnapshot.documentID,
-                    //                         namaDonasi: task['namaDonasi'],
-                    //                         shortDeskripsi: task['shortDeskripsi'],
-                    //                         danaDonasi: task['danaDonasi'],
-                    //                         deskripsi: task['deskripsi'],
-                    //                         kategori: task['kategori'],
-           
-                    //                       );
-                    //                     }),
-                    //                   );
-                    //                 });
-                    //        };
-                    //       } else {
-                    //         return Container();
-                    //       }
-                    //     }),
-                    // ),
 
                     FadeAnimation(
                         2,
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(
-                            _showNativeView();
+                            String documentId = widget.documentId;
+                            String namaDonasi = widget.namaDonasi;
+                            String deskripsi = widget.deskripsi;
+                            String kategori = widget.kategori;
+                            String gambarDonasi = widget.gambarDonasi.toString();
 
-//                                              new MaterialPageRoute(
-//                                                  builder:
-//                                                      (BuildContext context) =>
-//                                                          new Nominal()));
-//                            String documentId = widget.documentId;
-//                            String namaDonasi = widget.namaDonasi;
-//                            String deskripsi = widget.deskripsi;
-
-                            
-                            
                             int danaDonasi =
                                 int.parse(widget.danaDonasi.toString());
                             DocumentReference documentReference =
                                 FirebaseFirestore.instance
                                     .collection("Donasi")
                                     .document(documentId);
-                            // Map<String, dynamic> donasis = {
-                            //   "namaDonasi": namaDonasi,
-                            //   "deskripsi": deskripsi,
-                            //   "danaDonasi": danaDonasi + 1,
-                            // };
+                            Map<String, dynamic> students = {
+                              "namaDonasi": namaDonasi,
+                              "deskripsi": deskripsi,
+                              "danaDonasi": danaDonasi + 1,
+                            };
 
-                            // documentReference
-                            //     .setData(donasis)
-                            //     .whenComplete(() {
-                            //   print("$namaDonasi updated");
-                            // }
-                            // );
-                            // showDialog(
-                            //     context: context,
-                            //     builder: (BuildContext context) {
-                            //       return AlertDialog(
-                            //         title: Text(
-                            //             'Terimakasih sudah menyetujui aspirasi dan keluhan ini,silahkan liat aspirasi dan keluhan yang lain'),
-                            //         actions: <Widget>[
-                            //           FlatButton(
-                            //             child: Text('OK'),
-                            //             onPressed: () {
-                            //               Navigator.of(context).push(
-                            //                   new MaterialPageRoute(
-                            //                       builder:
-                            //                           (BuildContext context) =>
-                            //                               new Nominal()));
-                            //             },
-                            //           ),
-                            //         ],
-                            //       );
-                            //     });
-//                          },
+                            documentReference
+                                .setData(students)
+                                .whenComplete(() {
+                              print("$namaDonasi updated");
+                            });
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        'Terimakasih sudah menyetujui aspirasi dan keluhan ini,silahkan liat aspirasi dan keluhan yang lain'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text('OK'),
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              new MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          new DetailDonasi()));
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
@@ -303,7 +206,7 @@ class _DetailDonasiState extends State<DetailDonasi> {
                                 ])),
                             child: Center(
                               child: Text(
-                                "Setuju",
+                                "Donasi",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -311,22 +214,6 @@ class _DetailDonasiState extends State<DetailDonasi> {
                             ),
                           ),
                         )),
-
-                
-
-
-                              
-                            // onPressed : (){
-                            //   Navigator.of(context).push(
-                            //                   new MaterialPageRoute(
-                            //                       builder:
-                            //                           (BuildContext context) =>
-                            //                               new InfoScreen()));
-                            // }
-                 
-                          
-
-                        
                     // FadeAnimation(
                     //     1.5,
                     //     Text(
@@ -336,7 +223,7 @@ class _DetailDonasiState extends State<DetailDonasi> {
                     //           fontWeight: FontWeight.bold,
                     //           fontSize: 20),
                     //     )),
-              ]),
+                  ]),
             ),
             // FadeAnimation(
             //     1.8,
@@ -350,3 +237,283 @@ class _DetailDonasiState extends State<DetailDonasi> {
   }
 }
 
+
+
+
+
+// class DetailDonasi extends StatefulWidget {
+//   // final DocumentSnapshot MyStudent;
+//   // DetailDonasi({this.MyStudent});
+//   final String namaDonasi, deskripsi, documentId, gambarDonasi, kategori;
+//   final int danaDonasi;
+//   DetailDonasi({
+//     // @required this.isEdit,
+//     @required this.documentId,
+//     @required this.namaDonasi,
+//     @required this.deskripsi,
+//     @required this.danaDonasi,
+//     @required this.kategori,
+//     @required this.gambarDonasi,
+//   });
+//   @override
+//   _DetailDonasiState createState() => _DetailDonasiState();
+// }
+
+// class _DetailDonasiState extends State<DetailDonasi> {
+//  @override
+//   Widget build(BuildContext context) {
+//     // final ControllerDatabase database = new ControllerDatabase();
+
+//     final width = MediaQuery.of(context).size.width;
+//     Size size = MediaQuery.of(context).size;
+//     var delay = 1.5;
+//     // final progress = widget.danaDonasi;
+//     return Scaffold(
+//       appBar: AppBar(
+//           centerTitle: false,
+//           backgroundColor: Colors.white,
+//           elevation: 0,
+//           title: Text("Detail Aspirasi dan Keluhan",
+//               style: TextStyle(color: Colors.black)),
+//           leading: IconButton(
+//               icon: Icon(
+//                 Icons.arrow_back,
+//                 color: Colors.black,
+//               ),
+//               onPressed: () {
+//                 Navigator.of(context).push(new MaterialPageRoute(
+//                     builder: (BuildContext context) => new InfoScreen()));
+//               })),
+//       body: SingleChildScrollView(
+//         child: Container(
+//           height: MediaQuery.of(context).size.height,
+//           decoration: new BoxDecoration(
+//               gradient: new LinearGradient(
+//             begin: Alignment.topCenter,
+//             end: Alignment.bottomCenter,
+//             colors: [
+//               Color.fromARGB(255, 116, 198, 157),
+//               Color.fromARGB(237, 8, 28, 21)
+//             ],
+//           )),
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: <Widget>[
+//               Container(
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                     color: Colors.white,
+//                     borderRadius: BorderRadius.only(
+//                       bottomLeft: Radius.circular(40),
+//                       bottomRight: Radius.circular(40),
+//                     )),
+//                 child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: <Widget>[
+//                       Container(
+//                         margin: EdgeInsets.symmetric(vertical: 0),
+//                         padding: EdgeInsets.symmetric(horizontal: 10),
+//                         child: Stack(children: <Widget>[
+//                           Container(
+//                               decoration: BoxDecoration(
+//                                 color: Colors.white,
+//                                 shape: BoxShape.circle,
+//                               ),
+//                               child: Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   children: <Widget>[
+//                                     Image.asset("img/orang.jpg"),
+//                                     Center(
+//                                       child: Text(widget.namaDonasi,
+//                                           style: TextStyle(
+//                                               color:
+//                                                   Color.fromRGBO(49, 39, 79, 1),
+//                                               fontWeight: FontWeight.bold,
+//                                               fontSize: 20)),
+//                                     ),
+//                                     new Padding(
+//                                         padding:
+//                                             EdgeInsets.fromLTRB(0, 10, 0, 0)),
+//                                     FadeAnimation(
+//                                         1.5,
+//                                         Row(
+//                                           mainAxisAlignment:
+//                                               MainAxisAlignment.center,
+//                                           children: <Widget>[
+//                                             Center(
+//                                               child: new Text(
+//                                                 "widget.danaDonasi.toString()",
+//                                                 style: TextStyle(
+//                                                     color: Colors.green,
+//                                                     fontWeight:
+//                                                         FontWeight.bold),
+//                                               ),
+//                                             ),
+//                                             Center(
+//                                               child: new Text(
+//                                                 " mahasiswa telah menyetujui aspirasi dan keluhan ini",
+//                                                 style: TextStyle(
+//                                                     color: Colors.grey,
+//                                                     fontSize: 10),
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         )),
+//                                     new Padding(padding: EdgeInsets.all(3)),
+//                                     FadeAnimation(
+//                                         1.5,
+//                                         Stack(
+//                                           children: <Widget>[
+//                                             Container(
+//                                               width: 350,
+//                                               height: 10,
+//                                               decoration: BoxDecoration(
+//                                                   color: Colors.grey[200],
+//                                                   borderRadius:
+//                                                       BorderRadius.circular(5)),
+//                                             ),
+//                                             // Material(
+//                                             //   borderRadius:
+//                                             //       BorderRadius.circular(5),
+//                                             //   child: AnimatedContainer(
+//                                             //     height: 10,
+//                                             //     width: progress * 1.0,
+//                                             //     duration:
+//                                             //         Duration(milliseconds: 100),
+//                                             //     decoration: BoxDecoration(
+//                                             //         color: Colors.lightGreen,
+//                                             //         borderRadius:
+//                                             //             BorderRadius.circular(
+//                                             //                 5)),
+//                                             //   ),
+//                                             // )
+//                                           ],
+//                                         )),
+//                                     new Padding(
+//                                         padding:
+//                                             EdgeInsets.fromLTRB(0, 10, 0, 0)),
+//                                     FadeAnimation(
+//                                         1.5,
+//                                         Center(
+//                                           child: Text(
+//                                             "Deskripsi",
+//                                             style: TextStyle(
+//                                                 color: Color.fromRGBO(
+//                                                     49, 39, 79, 1),
+//                                                 fontWeight: FontWeight.bold,
+//                                                 fontSize: 20),
+//                                           ),
+//                                         )),
+//                                     FadeAnimation(
+//                                         1.5,
+//                                         Padding(
+//                                           padding: const EdgeInsets.symmetric(
+//                                               vertical: 5, horizontal: 10),
+//                                           child: Center(
+//                                             child: Text(
+//                                               widget.deskripsi,
+//                                               style: TextStyle(
+//                                                   color: Color.fromRGBO(
+//                                                       49, 39, 79, 1),
+//                                                   fontSize: 12),
+//                                             ),
+//                                           ),
+//                                         )),
+//                                   ]))
+//                         ]),
+//                       )
+//                     ]),
+//               ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 20),
+              //   child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: <Widget>[
+              //         //
+              //         new Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+
+              //         FadeAnimation(
+              //             2,
+              //             GestureDetector(
+              //               onTap: () {
+              //                 String documentId = widget.documentId;
+              //                 String name = widget.name;
+              //                 String deskripsi = widget.deskripsi;
+
+              //                 int jumlahLike =
+              //                     int.parse(widget.jumlahLike.toString());
+              //                     database.updateJumlah(name, deskripsi, jumlahLike, documentId);
+              //                 // DocumentReference documentReference =
+              //                 //     FirebaseFirestore.instance
+              //                 //         .collection("Aspirasi")
+              //                 //         .document(documentId);
+              //                 // Map<String, dynamic> students = {
+              //                 //   "name": name,
+              //                 //   "deskripsi": deskripsi,
+              //                 //   "jumlahLike": jumlahLike + 1,
+              //                 //   "status": status,
+              //                 // };
+
+              //                 // documentReference
+              //                 //     .setData(students)
+              //                 //     .whenComplete(() {
+              //                 //   print("$name updated");
+              //                 // });
+              //                 showDialog(
+              //                     context: context,
+              //                     builder: (BuildContext context) {
+              //                       return AlertDialog(
+              //                         title: Text(
+              //                             'Terimakasih sudah menyetujui aspirasi dan keluhan ini'),
+              //                         actions: <Widget>[
+              //                           FlatButton(
+              //                             child: Text('OK'),
+              //                             onPressed: () {
+              //                               Navigator.of(context).push(
+              //                                   new MaterialPageRoute(
+              //                                       builder: (BuildContext
+              //                                               context) =>
+              //                                           new Home()));
+              //                             },
+              //                           ),
+              //                         ],
+              //                       );
+              //                     });
+              //               },
+              //               child: Container(
+              //                 height: 50,
+              //                 decoration: BoxDecoration(
+              //                   borderRadius: BorderRadius.circular(10),
+              //                   gradient: LinearGradient(colors: [
+              //                     Color.fromARGB(200, 218, 215, 205),
+              //                     Color.fromARGB(255, 163, 177, 138),
+              //                   ]),
+              //                   boxShadow: [
+              //                     BoxShadow(
+              //                       color: Colors.white.withOpacity(0.2),
+              //                       spreadRadius: 2,
+              //                       blurRadius: 2,
+              //                       offset: Offset(
+              //                           0, 2), // changes position of shadow
+              //                     ),
+              //                   ],
+              //                 ),
+              //                 child: Center(
+              //                   child: Text(
+              //                     "Setuju",
+              //                     style: TextStyle(
+              //                         color: Colors.black,
+              //                         fontWeight: FontWeight.bold),
+              //                   ),
+              //                 ),
+              //               ),
+              //             )),
+              //       ]),
+              // ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

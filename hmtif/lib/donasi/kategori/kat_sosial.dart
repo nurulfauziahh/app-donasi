@@ -106,7 +106,7 @@ class _KatSosialState extends State<KatSosial> {
                                             documentId:
                                                 documentSnapshot.documentID,
                                             namaDonasi: task['namaDonasi'],
-                                            shortDeskripsi: task['shortDeskripsi'],
+   
                                             danaDonasi: task['danaDonasi'],
                                             deskripsi: task['deskripsi'],
                                             kategori: task['kategori'],
