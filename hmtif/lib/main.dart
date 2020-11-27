@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hmtif/HalamanAdminAspirasi.dart';
+import 'package:hmtif/Views/coba/AuthView.dart';
 
 import 'AuthenticationServices.dart';
-import 'HalamanAdmin.dart';
 import 'HalamanRegister.dart';
 import 'HalamanUtama.dart';
-import 'package:hmtif/donasi/info_screen.dart';
-import 'package:hmtif/donasi/admin/admin_donasi.dart';
-import 'package:hmtif/donasi/details/details_screen.dart';
+import 'Views/admin/HalamanAdminAspirasi.dart';
+import 'Views/coba/MyApp.dart';
+import 'Views/coba/WelcomeView.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +17,9 @@ Future<void> main() async {
   runApp(MaterialApp(
     initialRoute: '/login',
     routes: {
-      '/login': (context) => LoginScreen(),
+      '/login': (context) => MyApp(),
       '/admin': (context) => AdminAspirasi(),
       '/user': (context) => Home(),
-      '/donasi2': (context) => InfoScreen(),
-      '/adminDonasi': (context) => AdminDonasi(),
-      '/baru': (context) => DetailDonasi(),
     },
   ));
 }
@@ -143,47 +140,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text('Login User'),
                             onPressed: () {
                               Navigator.pushNamed(context, '/user');
-                            },
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 30),
-                      
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          FlatButton(
-                            child: Text('Login Donasi2'),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/donasi2');
-                            },
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                      // SizedBox(height: 30),
-                      
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: [
-                      //     FlatButton(
-                      //       child: Text('Login Admin Donasi'),
-                      //       onPressed: () {
-                      //         Navigator.pushNamed(context, '/adminDonasi');
-                      //       },
-                      //       color: Colors.white,
-                      //     ),
-                      //   ],
-                      // ),
-                       SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          FlatButton(
-                            child: Text('Donasi admin'),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/adminDonasi');
                             },
                             color: Colors.white,
                           ),

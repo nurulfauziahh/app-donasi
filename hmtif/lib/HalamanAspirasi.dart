@@ -28,11 +28,11 @@ class Aspirasi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
-        appBar: AppBar(
-          // title: Text("Halaman Aspirasi",
-          //     style: TextStyle(color: Colors.grey[600])),
-          backgroundColor: Colors.white,
-        ),
+        // appBar: AppBar(
+        //   // title: Text("Halaman Aspirasi",
+        //   //     style: TextStyle(color: Colors.grey[600])),
+        //   backgroundColor: Colors.white,
+        // ),
         body: SingleChildScrollView(
           child: new Container(
             child: new Column(
@@ -45,43 +45,43 @@ class Aspirasi extends StatelessWidget {
                           fit: BoxFit.fill)),
                   child: Stack(
                     children: <Widget>[
-                      Positioned(
-                        left: 110,
-                        width: 80,
-                        height: 180,
-                        child: FadeAnimation(
-                            1,
-                            Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('img/light-1.png'))),
-                            )),
-                      ),
-                      Positioned(
-                        left: 200,
-                        width: 80,
-                        height: 130,
-                        child: FadeAnimation(
-                            1.3,
-                            Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('img/light-2.png'))),
-                            )),
-                      ),
-                      Positioned(
-                        right: 0,
-                        top: -30,
-                        width: 80,
-                        height: 150,
-                        child: FadeAnimation(
-                            1.5,
-                            Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('img/clock.png'))),
-                            )),
-                      ),
+                      // Positioned(
+                      //   left: 110,
+                      //   width: 80,
+                      //   height: 180,
+                      //   child: FadeAnimation(
+                      //       1,
+                      //       Container(
+                      //         decoration: BoxDecoration(
+                      //             image: DecorationImage(
+                      //                 image: AssetImage('img/light-1.png'))),
+                      //       )),
+                      // ),
+                      // Positioned(
+                      //   left: 200,
+                      //   width: 80,
+                      //   height: 130,
+                      //   child: FadeAnimation(
+                      //       1.3,
+                      //       Container(
+                      //         decoration: BoxDecoration(
+                      //             image: DecorationImage(
+                      //                 image: AssetImage('img/light-2.png'))),
+                      //       )),
+                      // ),
+                      // Positioned(
+                      //   right: 0,
+                      //   top: -30,
+                      //   width: 80,
+                      //   height: 150,
+                      //   child: FadeAnimation(
+                      //       1.5,
+                      //       Container(
+                      //         decoration: BoxDecoration(
+                      //             image: DecorationImage(
+                      //                 image: AssetImage('img/clock.png'))),
+                      //       )),
+                      // ),
                       Positioned(
                         child: FadeAnimation(
                             1.6,
@@ -117,14 +117,14 @@ class Aspirasi extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         gradient: LinearGradient(colors: [
-                          Color.fromARGB(255, 224, 226, 238),
-                          Color.fromARGB(255, 224, 226, 238),
+                          Color.fromARGB(255, 75, 71, 68),
+                          Color.fromARGB(255, 75, 71, 68),
                         ])),
                     child: Center(
                       child: Text(
                         "Tambah Aspirasi",
                         style: TextStyle(
-                            color: Colors.grey[700],
+                            color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -156,23 +156,20 @@ class Aspirasi extends StatelessWidget {
                               return FadeAnimation(
                                   1.8,
                                   Card(
-                                    color: Color.fromARGB(225, 71, 92, 135),
+                                    color: Color.fromARGB(225, 192, 158, 112),
                                     child: ListTile(
                                         title: Text(
                                             documentSnapshot.data()['name'],
                                             style:
-                                                TextStyle(color: Colors.white)),
+                                                TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                                         subtitle: Text(
                                             "Like " +
                                                 documentSnapshot
                                                     .data()['jumlahLike']
                                                     .toString(),
                                             style:
-                                                TextStyle(color: Colors.white)),
-                                        // leading: CircleAvatar(
-                                        //     child: Image(
-                                        //   image: AssetImage('img/akun.png'),
-                                        // )),
+                                                TextStyle(color: Colors.black)),
+                                        
                                         trailing: PopupMenuButton(
                                           itemBuilder: (BuildContext context) {
                                             return List<
@@ -262,20 +259,85 @@ class Aspirasi extends StatelessWidget {
                               return FadeAnimation(
                                   1.8,
                                   Card(
-                                    color: Color.fromARGB(225, 71, 92, 135),
+                                    color: Color.fromARGB(225, 192, 158, 112),
                                     child: ListTile(
                                         title: Text(
                                             documentSnapshot.data()['name'],
                                             style:
-                                                TextStyle(color: Colors.white)),
+                                                TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
                                         subtitle: Text(
                                             "Like " +
                                                 documentSnapshot
                                                     .data()['jumlahLike']
                                                     .toString(),
                                             style:
-                                                TextStyle(color: Colors.white)),
-                                        
+                                                TextStyle(color: Colors.black)),
+                                        // leading: CircleAvatar(
+                                        //     child: Image(
+                                        //   image: AssetImage('img/akun.png'),
+                                        // )),
+                                        // trailing: PopupMenuButton(
+                                        //   itemBuilder: (BuildContext context) {
+                                        //     return List<PopupMenuEntry<String>>()
+                                        //       ..add(PopupMenuItem<String>(
+                                        //         value: 'edit',
+                                        //         child: Text('Edit'),
+                                        //       ))
+                                        //       ..add(PopupMenuItem<String>(
+                                        //         value: 'delete',
+                                        //         child: Text('Delete'),
+                                        //       ));
+                                        //   },
+                                        //   onSelected: (String value) async {
+                                        //     if (value == 'edit') {
+                                        //       bool result = await Navigator.push(
+                                        //         context,
+                                        //         MaterialPageRoute(
+                                        //             builder: (context) {
+                                        //           return EditAspirasi(
+                                        //             documentId: documentSnapshot
+                                        //                 .documentID,
+                                        //             name: task['name'],
+                                        //             deskripsi: task['deskripsi'],
+                                        //             jumlahLike:
+                                        //                 task['jumlahLike'],
+                                        //           );
+                                        //         }),
+                                        //       );
+                                        //     } else if (value == 'delete') {
+                                        //       showDialog(
+                                        //         context: context,
+                                        //         builder: (BuildContext context) {
+                                        //           return AlertDialog(
+                                        //             title:
+                                        //                 Text('Yakin mau hapus?'),
+                                        //             actions: <Widget>[
+                                        //               FlatButton(
+                                        //                 child: Text('Tidak'),
+                                        //                 onPressed: () {
+                                        //                   Navigator.pop(context);
+                                        //                 },
+                                        //               ),
+                                        //               FlatButton(
+                                        //                 child: Text('Ya'),
+                                        //                 onPressed: () {
+                                        //                   documentSnapshot
+                                        //                       .reference
+                                        //                       .delete();
+                                        //                   Navigator.pop(context);
+                                        //                 },
+                                        //               ),
+                                        //             ],
+                                        //           );
+                                        //         },
+                                        //       );
+                                        //     }
+                                        //   },
+                                        //   child: Icon(
+                                        //     Icons.more_vert,
+                                        //     color: Colors.white,
+                                        //   ),
+                                        // ),
                                         isThreeLine: true,
                                         onTap: () async {
                                           bool result = await Navigator.push(

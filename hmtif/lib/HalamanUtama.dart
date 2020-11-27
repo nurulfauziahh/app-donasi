@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'HalamanAspirasi.dart';
 import 'HalamanBeranda.dart';
 import 'Login_Page.dart';
+import 'Views/HalamanAspirasi.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -20,8 +20,8 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final _widgetOptions = [
     Aspirasi(),
-    Beranda(),
-    Aspirasi(),
+    // Beranda(),
+    // Aspirasi(),
   ];
   
 
@@ -31,18 +31,18 @@ class _HomeState extends State<Home> {
       
       bottomNavigationBar: CurvedNavigationBar(
         index: 0,
-        color: Colors.white,
-        backgroundColor: Colors.blueGrey[50],
-        buttonBackgroundColor: Colors.white,
+        color:  Color.fromARGB(255, 27, 67, 50),
+        backgroundColor: Colors.white,
+        buttonBackgroundColor: Color.fromARGB(225, 27, 67, 50),
         height: 50,
         items: <Widget>[
           Icon(
             Icons.menu_book_outlined,
             size: 20,
-            color: Colors.black,
+            color: Colors.white,
           ),
-          Icon(Icons.home, size: 20, color: Colors.black),
-          Icon(Icons.menu_book_outlined, size: 20, color: Colors.black),
+          // Icon(Icons.home, size: 20, color: Colors.white),
+          // Icon(Icons.menu_book_outlined, size: 20, color: Colors.white),
         ],
         animationDuration: Duration(
           milliseconds: 200

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hmtif/HalamanUtama.dart';
 
+import 'Controller/ControllerDatabase.dart';
 import 'DatabaseManager.dart';
+import 'Views/HalamanAspirasi.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +28,8 @@ class TambahAspirasi extends StatefulWidget {
 }
 
 class _TambahAspirasiState extends State<TambahAspirasi> {
-  String name, deskripsi;
+  ControllerDatabase database = new ControllerDatabase();
+  String name, deskripsi, status = "belum diproses";
   int jumlahLike;
   getAspirasiName(name) {
     this.name = name;
@@ -35,8 +39,6 @@ class _TambahAspirasiState extends State<TambahAspirasi> {
     this.deskripsi = deskripsi;
   }
 
- 
-
   getAspirasiLike(jumlahLike) {
     this.jumlahLike = int.parse(jumlahLike);
   }
@@ -44,13 +46,12 @@ class _TambahAspirasiState extends State<TambahAspirasi> {
   Future<DocumentSnapshot> createData() async {
     await Firebase.initializeApp();
     DocumentReference documentReference =
-        Firestore.instance.collection("Aspirasi").document();
+        Firestore.instance.collection("AspirasiMahasiswa").document();
 
     //createMap
     Map<String, dynamic> aspirasi = {
       "name": name,
       "deskripsi": deskripsi,
-      "jumlahLike": 0,
     };
 
     documentReference.setData(aspirasi).whenComplete(() {
@@ -58,27 +59,25 @@ class _TambahAspirasiState extends State<TambahAspirasi> {
     });
   }
 
- 
-
   @override
   void initState() {
-    
     super.initState();
   }
-
-  
 
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text("Halaman Tambah Aspirasi"),
+          backgroundColor: Color.fromARGB(237, 8, 28, 21),
         ),
+        backgroundColor: Colors.white,
         body: Container(
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(children: <Widget>[
+                Image.asset("img/6558.jpg"),
                 Padding(
                   padding: EdgeInsets.only(bottom: 8),
                   child: TextFormField(
@@ -107,7 +106,6 @@ class _TambahAspirasiState extends State<TambahAspirasi> {
                     },
                   ),
                 ),
-                
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -117,16 +115,57 @@ class _TambahAspirasiState extends State<TambahAspirasi> {
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16)),
-                          child: Text("Create"),
+                          child: Text("Tambah"),
                           textColor: Colors.white,
                           onPressed: () {
-                            createData();
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                      "Yakin ingin menyampaikan aspirasi ini?"),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('Ya'),
+                                      onPressed: () {
+                                        // createData();
+                                        database.createData(name, deskripsi);
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'Aspirasi dan keluhan berhasil ditambahkan!!!'),
+                                                actions: <Widget>[
+                                                  FlatButton(
+                                                    child: Text('Ok'),
+                                                    onPressed: () {
+                                                      Navigator.of(context).push(
+                                                          new MaterialPageRoute(
+                                                              builder: (BuildContext
+                                                                      context) =>
+                                                                  new Home()));
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text('Tidak'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }),
-                      
                     ],
                   ),
                 ),
-               
               ]),
             ),
           ),

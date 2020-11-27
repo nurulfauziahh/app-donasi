@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'DatabaseManager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,16 +13,16 @@ Future<void> main() async {
         brightness: Brightness.light,
         primaryColor: Colors.blue,
         accentColor: Colors.cyan),
-    home: EditAspirasi(),
+    home: EditAspirasiAdmin(),
   ));
 }
 
-class EditAspirasi extends StatefulWidget {
+class EditAspirasiAdmin extends StatefulWidget {
   final String name, deskripsi, documentId, status;
   // final bool isEdit;
 
   final int jumlahLike;
-  EditAspirasi({
+  EditAspirasiAdmin({
     // @required this.isEdit,
     @required this.documentId,
     @required this.name,
@@ -37,7 +36,7 @@ class EditAspirasi extends StatefulWidget {
   _EditAspirasiState createState() => _EditAspirasiState();
 }
 
-class _EditAspirasiState extends State<EditAspirasi> {
+class _EditAspirasiState extends State<EditAspirasiAdmin> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerDeskripsi = TextEditingController();
   String name, studentId, studyProgramId;
@@ -134,7 +133,7 @@ class _EditAspirasiState extends State<EditAspirasi> {
                                     .document(documentId);
                             Map<String, dynamic> students = {
                               "name": name,
-                              "deskripsi": deskripsi,
+                              "deskripsi": deskripsi+" Catatan: dirubah karena aspirasi dan keluhan terdapat kata-kata yang kurang berkenan.",
                               "jumlahLike": jumlahLike,
                               "status": status,
                             };
